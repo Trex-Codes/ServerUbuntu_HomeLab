@@ -300,6 +300,20 @@ The shared folder became accessible via both LAN and Tailscale IPs:
     smb://100.121.66.123/ExternalHDD
     ```
 
+In order to verify all the connections and the status of SMB
+
+- On Windows Explorer:
+    ```bash
+    # Status of SMB
+    sudo systemctl status smbd
+    
+   # Port SMB generally 445
+   sudo ss -tulpn | grep smbd
+
+    # Active Connections
+   sudo smbstatus
+    ```
+    
 This setup allows seamless access to your files stored on the external drive, from anywhere in the world using Tailscale, or locally from any device in the LAN.
 
 
