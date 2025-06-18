@@ -7,9 +7,9 @@ A personal server setup on **Ubuntu Server 20.04 LTS** that includes **Tailscale
 ## 📚 Table of Contents
 
 * [1. Tailscale 🔐](#1-tailscale-)
-    * [1.1 Installation](#11-installation)
-    * [1.2 Configuration](#12-configuration)
-    * [1.3 Usage](#13-usage)
+   - [1.1 Installation 🛠️](#11-installation-)
+   - [1.2 Configuration ⚙️](#12-configuration-)
+   - [1.3 Usage 🧪](#13-usage-)
 * [2. Netdata 📊](#2-netdata-)
   * [2.1 Installation 🛠️](#21-installation)
   * [2.2 Configuration ⚙️](#22-configuration)
