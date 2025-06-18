@@ -59,6 +59,10 @@ Netdata provides deep visibility into system metrics such as CPU, RAM, disk I/O,
 
 Tailscale is a modern, zero-configuration VPN built on WireGuard. It enables secure access to your private network from anywhere in the world. It’s especially useful for home labs, as it eliminates the need to expose ports or configure complex firewall rules.
 
+<img src="https://raw.githubusercontent.com/Trex-Codes/ServerUbuntu_HomeLab/master/Images/tail.webp" alt="Tailscale" width="600"/>
+
+
+
 ### 1.1 Installation 🛠
 #### 🧰 Requirements
 
@@ -122,8 +126,9 @@ ssh user@100.121.66.123
 
 ## 2. Netdata 📊
 Netdata is a highly optimized, real-time monitoring tool that provides insightful metrics for CPU, memory, disk I/O, network, and more — all presented via a powerful web-based dashboard.
-
 It’s ideal for keeping track of your server’s health and performance, with minimal resource usage.
+
+<img src="https://github.com/Trex-Codes/ServerUbuntu_HomeLab/blob/master/Images/netdata.png" alt="Tailscale" width="600"/>
 
 ### 2.1 Installation 🛠
 #### 🧰 Requirements
@@ -183,6 +188,9 @@ http://100.121.66.123:19999
 Adding an external hard drive (HDD) to your Ubuntu server provides additional storage capacity for files, backups, media, or services.
 
 This section explains how to mount, configure, and use an external disk in a persistent way.
+
+<img src="https://github.com/Trex-Codes/ServerUbuntu_HomeLab/blob/master/Images/disk.png" alt="Tailscale" width="600"/>
+
 
 ### 3.1 Installation 🛠
 
@@ -254,6 +262,9 @@ df -h /mnt/hdd
 ## 4. Extra: SMB Access 📂
 
 To enable file sharing from the external HDD across your LAN or through Tailscale, Samba was installed and configured on the server.
+
+<img src="https://github.com/Trex-Codes/ServerUbuntu_HomeLab/blob/master/Images/SMB.png" alt="Tailscale" width="600"/>
+
 
 Once the HDD was mounted at `/mnt/hdd`, install Samba:
 
