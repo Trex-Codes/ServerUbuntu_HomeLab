@@ -7,9 +7,9 @@ A personal server setup on **Ubuntu Server 20.04 LTS** that includes **Tailscale
 ## 📚 Table of Contents
 
 * [1. Tailscale 🔐](#1-tailscale-)
-  * [1.1 Installation 🛠️](#11-installation)
-  * [1.2 Configuration ⚙️](#12-configuration)
-  * [1.3 Usage 🧪](#13-usage)
+    * [1.1 Installation](#11-installation)
+    * [1.2 Configuration](#12-configuration)
+    * [1.3 Usage](#13-usage)
 * [2. Netdata 📊](#2-netdata-)
   * [2.1 Installation 🛠️](#21-installation)
   * [2.2 Configuration ⚙️](#22-configuration)
@@ -18,6 +18,7 @@ A personal server setup on **Ubuntu Server 20.04 LTS** that includes **Tailscale
   * [3.1 Installation 🛠️](#31-installation)
   * [3.2 Configuration ⚙️](#32-configuration)
   * [3.3 Usage 🧪](#33-usage)
+* [4. Extra: SMB Access 📂](#4-extra-smb-access-)
 * [Directory Structure 🏗️](#️-directory-structure)
 
 
@@ -177,6 +178,132 @@ If you’re connected via Tailscale, use the Tailscale IP instead:
 http://100.121.66.123:19999
 ```
 
+
+
+
+
+## 3. Disk HDD 💾
+Adding an external hard drive (HDD) to your Ubuntu server provides additional storage capacity for files, backups, media, or services.
+
+This section explains how to mount, configure, and use an external disk in a persistent way.
+
+### 3.1 Installation 🛠️
+
+#### 🧰 Requirements
+
+- A USB-connected external hard drive.
+- The drive may be formatted as ext4, NTFS, exFAT, etc.
+- sudo privileges required.
+
+#### ✅ Installing or identify the disk 
+First, identify the connected device:
+
+```bash
+lsblk
+
+# Or use
+sudo fdisk -l
+
+```
+You’ll see output like:
+
+```bash
+sdb      8:16   0 931.5G  0 disk
+└─sdb1   8:17   0 931.5G  0 part
+```
+
+
+
+#### 🧷 Create a Mount Point
+```bash
+sudo mkdir -p /mnt/hdd
+```
+
+#### 🔗 Mount the Drive Manually
+For `ext4` or `NTFS`:
+
+
+```bash
+sudo mount /dev/sdb1 /mnt/hdd
+```
+For `exFAT` (may require installing drivers):
+
+```bash
+sudo apt install exfat-fuse exfat-utils
+sudo mount -t exfat /dev/sdb1 /mnt/hdd
+```
+
+
+
+### 3.2 Configuration ⚙️
+
+Test without rebooting:
+```bash
+sudo mount -a
+```
+
+### 3.3 Usage 🧪
+You can now use /mnt/hdd for:
+
+- Storing backups using rsync, tar, or other tools
+- Hosting shared files with Samba or NFS
+- Attaching to services like Docker, Plex, or Nextcloud
+
+To check available space:
+```bash
+df -h /mnt/hdd
+```
+
+## 4. Extra: SMB Access 📂
+
+To enable file sharing from the external HDD across your LAN or through Tailscale, Samba was installed and configured on the server.
+
+Once the HDD was mounted at `/mnt/hdd`, install Samba:
+
+After ensuring the HDD was correctly mounted at /mnt/hdd, Samba was installed with:
+```bash
+sudo apt install samba
+```
+
+Then, a new share was defined in the Samba configuration file:
+
+```bash
+[ExternalHDD]
+   path = /mnt/hdd
+   browseable = yes
+   read only = no
+   guest ok = no
+   force user = trexcodes
+```
+
+To allow secure access, the user `Trex-Codes` (owner of the mount point) was added to the Samba password database:
+
+```bash
+# Add your user to the Samba password database:
+sudo smbpasswd -a trexcodes
+```
+
+Once the configuration was complete and the service restarted:
+
+```bash
+# Restart the service to apply changes
+sudo systemctl restart smbd
+```
+
+The shared folder became accessible via both LAN and Tailscale IPs:
+
+- On Windows Explorer:
+    ```bash
+    \\192.168.X.X\ExternalHDD
+    \\100.121.66.123\ExternalHDD
+    ```
+- On Linux/macOS file browsers:
+   ```bash
+    smb://192.168.X.X/ExternalHDD
+    smb://100.121.66.123/ExternalHDD
+    ```
+
+This setup allows seamless access to your files stored on the external drive, from anywhere in the world using Tailscale, or locally from any device in the LAN.
 
 
 
