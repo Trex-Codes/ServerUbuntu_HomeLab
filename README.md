@@ -10,21 +10,20 @@ A personal server setup on **Ubuntu Server 20.04 LTS** that includes **Tailscale
    - [1.1 Installation 🛠️](#11-installation-)
    - [1.2 Configuration ⚙️](#12-configuration-)
    - [1.3 Usage 🧪](#13-usage-)
-* [2. Netdata 📊](#2-netdata-)
-  * [2.1 Installation 🛠️](#21-installation)
-  * [2.2 Configuration ⚙️](#22-configuration)
-  * [2.3 Usage 🧪](#23-usage)
-* [3. Disk HDD 💾](#3-disk-hdd-)
-  * [3.1 Installation 🛠️](#31-installation)
-  * [3.2 Configuration ⚙️](#32-configuration)
-  * [3.3 Usage 🧪](#33-usage)
-* [4. Extra: SMB Access 📂](#4-extra-smb-access-)
-* [Directory Structure 🏗️](#️-directory-structure)
 
+* [2. Netdata 📊](#2-netdata-)
+  * [2.1 Installation 🛠️](#21-installation-)
+  * [2.2 Configuration ⚙️](#22-configuration-)
+  * [2.3 Usage 🧪](#23-usage-)
+    
+* [3. Disk HDD 💾](#3-disk-hdd-)
+  * [3.1 Installation 🛠️](#31-installation-)
+  * [3.2 Configuration ⚙️](#32-configuration-)
+  * [3.3 Usage 🧪](#33-usage-)
+
+* [4. Extra: SMB Access 📂](#4-extra-smb-access-)
 
 ---
-
-
 
 
 ## Installation Ubuntu Server 20.04 LTS 🔧
@@ -60,8 +59,7 @@ Netdata provides deep visibility into system metrics such as CPU, RAM, disk I/O,
 
 Tailscale is a modern, zero-configuration VPN built on WireGuard. It enables secure access to your private network from anywhere in the world. It’s especially useful for home labs, as it eliminates the need to expose ports or configure complex firewall rules.
 
-### 1.1 Installation 🛠️
-
+### 1.1 Installation 🛠
 #### 🧰 Requirements
 
 - Internet connection
@@ -104,8 +102,7 @@ tailscale status
 100.121.66.123  servertrexcodes  linux   active  direct
 ```
 
-### 1.2 Configuration ⚙️
-
+### 1.2 Configuration ⚙
 You typically won’t need much configuration. However, you can define ACLs or enable subnet routing if needed. Example:
 
 ```bash
@@ -128,7 +125,7 @@ Netdata is a highly optimized, real-time monitoring tool that provides insightfu
 
 It’s ideal for keeping track of your server’s health and performance, with minimal resource usage.
 
-### 2.1 Installation 🛠️
+### 2.1 Installation 🛠
 #### 🧰 Requirements
 - A running Ubuntu 20.04 server (with internet access)
 - Root privileges or a sudo-enabled user
@@ -153,7 +150,7 @@ And verify that Netdata is listening on port `19999`:
 sudo ss -tulpn | grep 19999
 ```
 
-### 2.2 Configuration ⚙️
+### 2.2 Configuration ⚙
 The default configuration works out of the box, but you can adjust settings if needed.
 
 Netdata's main config file can be found at:
@@ -187,7 +184,7 @@ Adding an external hard drive (HDD) to your Ubuntu server provides additional st
 
 This section explains how to mount, configure, and use an external disk in a persistent way.
 
-### 3.1 Installation 🛠️
+### 3.1 Installation 🛠
 
 #### 🧰 Requirements
 
@@ -235,7 +232,7 @@ sudo mount -t exfat /dev/sdb1 /mnt/hdd
 
 
 
-### 3.2 Configuration ⚙️
+### 3.2 Configuration ⚙
 
 Test without rebooting:
 ```bash
